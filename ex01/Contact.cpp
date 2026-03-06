@@ -1,8 +1,10 @@
 #include "Contact.hpp"
 
-bool Contact::SetContact(std::string firstName, std::string lastName,
-                         std::string nickName, std::string phoneNumber,
-                         std::string darkestSecret) {
+bool Contact::SetContact(const std::string &firstName,
+                         const std::string &lastName,
+                         const std::string &nickName,
+                         const std::string &phoneNumber,
+                         const std::string &darkestSecret) {
   if (firstName.empty() || lastName.empty() || nickName.empty() ||
       phoneNumber.empty() || darkestSecret.empty())
     return false;
