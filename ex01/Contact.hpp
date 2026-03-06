@@ -22,6 +22,4 @@ public:
   std::string GetDarkestSecret() const;
 };
 
-class Phonebook {};
-
 #endif // CONTACT_HPP
