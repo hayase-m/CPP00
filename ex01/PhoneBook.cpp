@@ -24,4 +24,14 @@ void PhoneBook::displayAllContacts() {
               << _formatField(_contacts[i].GetNickName()) << '|' << std::endl;
   }
 }
-void PhoneBook::displayContact(size_t searchIndex) {};
+void PhoneBook::displayContact(size_t searchIndex) {
+  if (searchIndex >= _contactsCount) {
+    std::cout << "Invalid index" << std::endl;
+    return;
+  }
+  std::cout << _contacts[searchIndex].GetFirstName() << std::endl
+            << _contacts[searchIndex].GetLastName() << std::endl
+            << _contacts[searchIndex].GetNickName() << std::endl
+            << _contacts[searchIndex].GetPhoneNumber() << std::endl
+            << _contacts[searchIndex].GetDarkestSecret() << std::endl;
+}
