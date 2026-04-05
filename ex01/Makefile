@@ -9,9 +9,9 @@ OBJDIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
 RM = rm -rf
 
--include $(OBJS:.o=.d)
-
 all: $(NAME)
+
+-include $(OBJS:.o=.d)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
