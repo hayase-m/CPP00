@@ -1,9 +1,10 @@
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <sstream>
 #include <string>
 
-static std::string readLine(const std::string &label) {
+static std::string readField(const std::string &label) {
   std::string value;
   std::cout << label;
   std::getline(std::cin, value);
@@ -19,11 +20,11 @@ int main(void) {
     std::getline(std::cin, command);
     if (command == "ADD") {
       Contact contact;
-      std::string firstName = readLine("first name ");
-      std::string lastName = readLine("last name ");
-      std::string nickName = readLine("nick name ");
-      std::string phoneNumber = readLine("phone number ");
-      std::string darkestSecret = readLine("darkest secret ");
+      std::string firstName = readField("first name: ");
+      std::string lastName = readField("last name: ");
+      std::string nickName = readField("nick name: ");
+      std::string phoneNumber = readField("phone number: ");
+      std::string darkestSecret = readField("darkest secret: ");
 
       if (contact.SetContact(firstName, lastName, nickName, phoneNumber,
                              darkestSecret))
@@ -31,11 +32,17 @@ int main(void) {
       else
         std::cout << "Empty fields are not allowed" << std::endl;
     } else if (command == "SEARCH") {
-
-    } else if (command == "EXIT") {
-
-    } else {
-    }
+      phoneBook.displayAllContacts();
+      size_t index;
+      char extra;
+      std::string indexText = readField("index: ");
+      std::istringstream iss(indexText);
+      if (!(iss >> index) || (iss >> extra))
+        std::cout << "Invalid index" << std::endl;
+      else
+        phoneBook.displayContact(index);
+    } else if (command == "EXIT")
+      break;
   }
   return 0;
 }
