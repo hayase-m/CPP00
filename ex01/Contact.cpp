@@ -5,9 +5,6 @@ bool Contact::SetContact(const std::string &firstName,
                          const std::string &nickName,
                          const std::string &phoneNumber,
                          const std::string &darkestSecret) {
-  if (firstName.empty() || lastName.empty() || nickName.empty() ||
-      phoneNumber.empty() || darkestSecret.empty())
-    return false;
   _firstName = firstName;
   _lastName = lastName;
   _nickName = nickName;

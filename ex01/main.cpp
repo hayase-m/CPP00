@@ -4,11 +4,52 @@
 #include <sstream>
 #include <string>
 
-static std::string readField(const std::string &label) {
-  std::string value;
-  std::cout << label;
-  std::getline(std::cin, value);
-  return value;
+static bool readField(const std::string &label, std::string &value) {
+  while (1) {
+    std::cout << label;
+    if (!std::getline(std::cin, value))
+      return false;
+    if (!value.empty()) {
+      return true;
+    }
+    std::cout << "Empty fields are not allowed" << std::endl;
+  }
+}
+
+static bool readContact(Contact &contact) {
+  std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
+  if (!readField("first name: ", firstName))
+    return false;
+  if (!readField("last name: ", lastName))
+    return false;
+  if (!readField("nick name: ", nickName))
+    return false;
+  if (!readField("phone number: ", phoneNumber))
+    return false;
+  if (!readField("darkest secret: ", darkestSecret))
+    return false;
+  contact.SetContact(firstName, lastName, nickName, phoneNumber, darkestSecret);
+  return true;
+}
+
+static bool readIndex(size_t &index) {
+  while (1) {
+    char extra;
+    std::string indexText;
+    std::cout << "index: ";
+    if (!std::getline(std::cin, indexText))
+      return false;
+    if (indexText.empty() || indexText[0] == '-') {
+      std::cout << "Invalid index" << std::endl;
+      continue;
+    }
+    std::istringstream iss(indexText);
+    if (!(iss >> index) || (iss >> extra)) {
+      std::cout << "Invalid index" << std::endl;
+      continue;
+    }
+    return true;
+  }
 }
 
 int main(void) {
@@ -17,30 +58,19 @@ int main(void) {
 
   while (1) {
     std::cout << "Enter a command" << std::endl;
-    std::getline(std::cin, command);
+    if (!std::getline(std::cin, command))
+      break;
     if (command == "ADD") {
       Contact contact;
-      std::string firstName = readField("first name: ");
-      std::string lastName = readField("last name: ");
-      std::string nickName = readField("nick name: ");
-      std::string phoneNumber = readField("phone number: ");
-      std::string darkestSecret = readField("darkest secret: ");
-
-      if (contact.SetContact(firstName, lastName, nickName, phoneNumber,
-                             darkestSecret))
-        phoneBook.addContact(contact);
-      else
-        std::cout << "Empty fields are not allowed" << std::endl;
+      if (!readContact(contact))
+        break;
+      phoneBook.addContact(contact);
     } else if (command == "SEARCH") {
       phoneBook.displayAllContacts();
       size_t index;
-      char extra;
-      std::string indexText = readField("index: ");
-      std::istringstream iss(indexText);
-      if (!(iss >> index) || (iss >> extra))
-        std::cout << "Invalid index" << std::endl;
-      else
-        phoneBook.displayContact(index);
+      if (!readIndex(index))
+        break;
+      phoneBook.displayContact(index);
     } else if (command == "EXIT")
       break;
   }
