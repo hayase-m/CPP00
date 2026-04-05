@@ -32,7 +32,7 @@ static bool readContact(Contact &contact) {
   return true;
 }
 
-static bool readIndex(size_t &index, PhoneBook &phoneBook) {
+static bool readIndex(size_t &index, const PhoneBook &phoneBook) {
   while (1) {
     char extra;
     std::string indexText;
@@ -45,7 +45,7 @@ static bool readIndex(size_t &index, PhoneBook &phoneBook) {
     }
     std::istringstream iss(indexText);
     if (!(iss >> index) || (iss >> extra) ||
-        index >= phoneBook.GetContactsCount()) {
+        index >= phoneBook.getContactsCount()) {
       std::cout << "Invalid index" << std::endl;
       continue;
     }
@@ -67,7 +67,7 @@ int main(void) {
         break;
       phoneBook.addContact(contact);
     } else if (command == "SEARCH") {
-      if (phoneBook.GetContactsCount() == 0) {
+      if (phoneBook.getContactsCount() == 0) {
         std::cout << "PhoneBook is empty" << std::endl;
         continue;
       }

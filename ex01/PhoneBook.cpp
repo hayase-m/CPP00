@@ -2,7 +2,7 @@
 
 PhoneBook::PhoneBook() : _contactIndex(0), _contactsCount(0) {}
 
-size_t PhoneBook::GetContactsCount() const { return _contactsCount; }
+size_t PhoneBook::getContactsCount() const { return _contactsCount; }
 
 void PhoneBook::addContact(const Contact &contact) {
   _contacts[_contactIndex] = contact;
@@ -11,13 +11,13 @@ void PhoneBook::addContact(const Contact &contact) {
     _contactsCount++;
 }
 
-std::string PhoneBook::_formatField(const std::string &field) {
+std::string PhoneBook::_formatField(const std::string &field) const {
   if (field.length() > 10)
     return field.substr(0, 9) + '.';
   return field;
 }
 
-void PhoneBook::displayAllContacts() {
+void PhoneBook::displayAllContacts() const {
   for (size_t i = 0; i < _contactsCount; i++) {
     std::cout << '|' << std::setw(10) << i << '|' << std::setw(10)
               << _formatField(_contacts[i].GetFirstName()) << '|'
@@ -26,7 +26,7 @@ void PhoneBook::displayAllContacts() {
               << _formatField(_contacts[i].GetNickName()) << '|' << std::endl;
   }
 }
-void PhoneBook::displayContact(size_t searchIndex) {
+void PhoneBook::displayContact(size_t searchIndex) const {
   std::cout << _contacts[searchIndex].GetFirstName() << std::endl
             << _contacts[searchIndex].GetLastName() << std::endl
             << _contacts[searchIndex].GetNickName() << std::endl
