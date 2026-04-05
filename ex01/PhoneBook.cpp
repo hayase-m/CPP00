@@ -2,6 +2,8 @@
 
 PhoneBook::PhoneBook() : _contactIndex(0), _contactsCount(0) {}
 
+size_t PhoneBook::GetContactsCount() const { return _contactsCount; }
+
 void PhoneBook::addContact(const Contact &contact) {
   _contacts[_contactIndex] = contact;
   _contactIndex = (_contactIndex + 1) % 8;
@@ -25,10 +27,6 @@ void PhoneBook::displayAllContacts() {
   }
 }
 void PhoneBook::displayContact(size_t searchIndex) {
-  if (searchIndex >= _contactsCount) {
-    std::cout << "Invalid index" << std::endl;
-    return;
-  }
   std::cout << _contacts[searchIndex].GetFirstName() << std::endl
             << _contacts[searchIndex].GetLastName() << std::endl
             << _contacts[searchIndex].GetNickName() << std::endl

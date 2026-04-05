@@ -15,6 +15,7 @@ private:
 
 public:
   PhoneBook();
+  size_t GetContactsCount() const;
   void addContact(const Contact &contact);
   void displayAllContacts();
   void displayContact(size_t searchIndex);
