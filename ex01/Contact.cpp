@@ -1,6 +1,6 @@
 #include "Contact.hpp"
 
-bool Contact::SetContact(const std::string &firstName,
+void Contact::SetContact(const std::string &firstName,
                          const std::string &lastName,
                          const std::string &nickName,
                          const std::string &phoneNumber,
@@ -10,7 +10,6 @@ bool Contact::SetContact(const std::string &firstName,
   _nickName = nickName;
   _phoneNumber = phoneNumber;
   _darkestSecret = darkestSecret;
-  return true;
 }
 
 std::string Contact::GetFirstName() const { return _firstName; }

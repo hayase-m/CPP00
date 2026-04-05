@@ -67,6 +67,10 @@ int main(void) {
         break;
       phoneBook.addContact(contact);
     } else if (command == "SEARCH") {
+      if (phoneBook.GetContactsCount() == 0) {
+        std::cout << "PhoneBook is empty" << std::endl;
+        continue;
+      }
       phoneBook.displayAllContacts();
       size_t index;
       if (!readIndex(index, phoneBook))
