@@ -3,7 +3,7 @@ NAME = tests
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
 
-SRCS = PhoneBook.cpp Contact.cpp main.cpp
+SRCS = Account.cpp tests.cpp
 
 OBJDIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
