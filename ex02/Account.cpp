@@ -12,12 +12,13 @@ void Account::_displayTimestamp() {
   std::tm *t = std::localtime(&now);
 
   std::cout << "[" << (t->tm_year + 1900) << std::setfill('0') << std::setw(2)
-            << t->tm_mon + 1 << "_" << std::setw(2) << t->tm_hour
-            << std::setw(2) << t->tm_min << std::setw(2) << t->tm_sec << "]";
+            << t->tm_mon + 1 << std::setw(2) << t->tm_mday << "_"
+            << std::setw(2) << t->tm_hour << std::setw(2) << t->tm_min
+            << std::setw(2) << t->tm_sec << "]";
 }
 
 Account::Account(int initial_deposit) {
-  _accountIndex = _nbAccounts++;
+  _accountIndex = _nbAccounts;
   _amount = initial_deposit;
   _nbDeposits = 0;
   _nbWithdrawals = 0;
