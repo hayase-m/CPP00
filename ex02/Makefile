@@ -1,9 +1,9 @@
 NAME = tests
 
-CC = c++
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
+CXX = c++
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic -MMD -MP
 
-SRCS = Account.cpp tests.cpp
+SRCS = ACXXount.cpp tests.cpp
 
 OBJDIR = objs
 OBJS = $(SRCS:%.cpp=$(OBJDIR)/%.o)
@@ -14,11 +14,11 @@ all: $(NAME)
 -include $(OBJS:.o=.d)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 $(OBJDIR)/%.o: %.cpp
 	@mkdir -p $(OBJDIR)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJDIR)
