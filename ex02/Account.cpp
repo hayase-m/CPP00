@@ -8,7 +8,7 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
-void Account::_displayTimestamp() {
+void Account::_displayTimestamp(void) {
   std::time_t now = std::time(NULL);
   std::tm *t = std::localtime(&now);
 
