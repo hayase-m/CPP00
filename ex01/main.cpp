@@ -4,7 +4,7 @@
 #include <sstream>
 #include <string>
 
-static bool readField(const std::string &label, std::string &value) {
+static bool ReadField(const std::string &label, std::string &value) {
   while (1) {
     std::cout << label;
     if (!std::getline(std::cin, value))
@@ -16,23 +16,23 @@ static bool readField(const std::string &label, std::string &value) {
   }
 }
 
-static bool readContact(Contact &contact) {
+static bool ReadContact(Contact &contact) {
   std::string firstName, lastName, nickName, phoneNumber, darkestSecret;
-  if (!readField("first name: ", firstName))
+  if (!ReadField("first name: ", firstName))
     return false;
-  if (!readField("last name: ", lastName))
+  if (!ReadField("last name: ", lastName))
     return false;
-  if (!readField("nick name: ", nickName))
+  if (!ReadField("nick name: ", nickName))
     return false;
-  if (!readField("phone number: ", phoneNumber))
+  if (!ReadField("phone number: ", phoneNumber))
     return false;
-  if (!readField("darkest secret: ", darkestSecret))
+  if (!ReadField("darkest secret: ", darkestSecret))
     return false;
   contact.SetContact(firstName, lastName, nickName, phoneNumber, darkestSecret);
   return true;
 }
 
-static bool readIndex(size_t &index, const PhoneBook &phoneBook) {
+static bool ReadIndex(size_t &index, const PhoneBook &phoneBook) {
   while (1) {
     char extra;
     std::string indexText;
@@ -45,7 +45,7 @@ static bool readIndex(size_t &index, const PhoneBook &phoneBook) {
     }
     std::istringstream iss(indexText);
     if (!(iss >> index) || (iss >> extra) ||
-        index >= phoneBook.getContactsCount()) {
+        index >= phoneBook.GetContactsCount()) {
       std::cout << "Invalid index" << std::endl;
       continue;
     }
@@ -63,19 +63,19 @@ int main(void) {
       break;
     if (command == "ADD") {
       Contact contact;
-      if (!readContact(contact))
+      if (!ReadContact(contact))
         break;
-      phoneBook.addContact(contact);
+      phoneBook.AddContact(contact);
     } else if (command == "SEARCH") {
-      if (phoneBook.getContactsCount() == 0) {
+      if (phoneBook.GetContactsCount() == 0) {
         std::cout << "PhoneBook is empty" << std::endl;
         continue;
       }
-      phoneBook.displayAllContacts();
+      phoneBook.DisplayAllContacts();
       size_t index;
-      if (!readIndex(index, phoneBook))
+      if (!ReadIndex(index, phoneBook))
         break;
-      phoneBook.displayContact(index);
+      phoneBook.DisplayContact(index);
     } else if (command == "EXIT")
       break;
   }
