@@ -5,6 +5,8 @@
 #include <string>
 
 static bool ReadField(const std::string &label, std::string &value) {
+  if (std::cin.eof())
+    return false;
   while (1) {
     std::cout << label;
     if (!std::getline(std::cin, value))
@@ -33,6 +35,8 @@ static bool ReadContact(Contact &contact) {
 }
 
 static bool ReadIndex(size_t &index, const PhoneBook &phoneBook) {
+  if (std::cin.eof())
+    return false;
   while (1) {
     char extra;
     std::string indexText;
@@ -58,6 +62,8 @@ int main(void) {
   std::string command = "";
 
   while (1) {
+    if (std::cin.eof())
+      break;
     std::cout << "Enter a command" << std::endl;
     if (!std::getline(std::cin, command))
       break;
